@@ -7,9 +7,17 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     """Toma una lista de enteros y strings y devuelve una lista con todos los
     elementos numéricos al final.
     """
-    pass # Completar
 
+    letras: List[str] = []
+    numeros: List[float] = []
 
+    for x in lista:
+        if isinstance(x, str):
+            letras += [x]  
+        elif isinstance(x, (float,int)):
+            numeros += [x]
+    
+    return letras + numeros
 # NO MODIFICAR - INICIO
 assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
 # NO MODIFICAR - FIN
@@ -20,8 +28,10 @@ assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 
 def numeros_al_final_comprension(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """Re-escribir utilizando comprensión de listas."""
-    pass # Completar
 
+    lista_completa: List[Union[float, str]] = []
+    lista_completa = [x for x in lista if isinstance(x, str)] + [y for y in lista if isinstance(y, (float, int))]
+    return lista_completa 
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_comprension([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -35,7 +45,9 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
-    pass # Completar
+    lista_completa: List[Union[float, str]] = []
+    lista_completa = sorted(lista, key=lambda x: isinstance(x, (int, float)))
+    return lista_completa  
 
 
 # NO MODIFICAR - INICIO
@@ -50,8 +62,13 @@ def numeros_al_final_filter(lista: List[Union[float, str]]) -> List[Union[float,
     """CHALLENGE OPCIONAL - Re-escribir utilizando la función filter.
     Referencia: https://docs.python.org/3/library/functions.html#filter
     """
-    pass # Completar
+    letras: List[str] = [] 
+    numeros: List[float] = []
 
+    letras = list(filter(lambda x: isinstance(x, str)), lista)    
+    numeros = list(filter(lambda x: isinstance(x, (int, float)), lista))
+
+    return letras + numeros
 
 # NO MODIFICAR - INICIO
 if __name__ == "__main__":
